@@ -23,7 +23,7 @@ namespace CommPinboardAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("authenticate")]
+        [HttpPost("authenticate")]
         public async Task<IActionResult> AuthenticateUser(string username, string password)
         {
             try

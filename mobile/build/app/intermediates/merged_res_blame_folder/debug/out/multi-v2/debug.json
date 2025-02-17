@@ -901,6 +901,25 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\jjosh\\Documents\\GitHub\\pinboard\\mobile\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,832",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "483,998"
+                    },
+                    "to": {
+                        "startLines": "155,159",
+                        "startColumns": "4,4",
+                        "startOffsets": "7894,8075",
+                        "endLines": "158,161",
+                        "endColumns": "12,12",
+                        "endOffsets": "8070,8239"
+                    }
+                },
+                {
                     "source": "C:\\Users\\jjosh\\.gradle\\caches\\transforms-3\\8859fd2468ade3ef2655d1f63d6737f2\\transformed\\jetified-window-1.2.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,9,17,25,37,43,49,50,51,52,53,54,55,61,66,74,89",
@@ -934,25 +953,6 @@
                         "startOffsets": "7229",
                         "endColumns": "82",
                         "endOffsets": "7307"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\jjosh\\Documents\\Flutter_Projects\\pinboard\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,832",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "483,998"
-                    },
-                    "to": {
-                        "startLines": "155,159",
-                        "startColumns": "4,4",
-                        "startOffsets": "7894,8075",
-                        "endLines": "158,161",
-                        "endColumns": "12,12",
-                        "endOffsets": "8070,8239"
                     }
                 },
                 {
@@ -1446,7 +1446,7 @@
             "outputFile": "com.example.pinboard.app-merged_res-26:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\jjosh\\Documents\\Flutter_Projects\\pinboard\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\jjosh\\Documents\\GitHub\\pinboard\\mobile\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

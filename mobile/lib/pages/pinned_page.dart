@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import './post_page.dart';
 import './update_profile.dart';
 import './comment_page.dart';
+import './dashboard_page.dart';
 
 class PinnedPage extends StatefulWidget {
   final List<Map<String, String>> pinnedPosts;
@@ -51,9 +52,10 @@ class _PinnedPageState extends State<PinnedPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildBackButton(context),
+                  _buildBackButton(context), // Stays on the left
+                  const Spacer(), // Pushes the other widgets to the right
+                  _buildUser(),
                   _buildUpdateProfile(context),
                 ],
               ),
@@ -70,7 +72,7 @@ class _PinnedPageState extends State<PinnedPage> {
     );
   }
 
-  Container _buildFloatingButtons(BuildContext context) {
+  Widget _buildFloatingButtons(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(bottom: 10), // Adjust position
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,9 +94,11 @@ class _PinnedPageState extends State<PinnedPage> {
             // Home Button (SVG)
             IconButton(
               icon: SvgPicture.asset("assets/icons/home.svg", width: 30, height: 30),
-              onPressed: () {
-                // Handle Home button action
-              },
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => DashboardPage(),
+                ),
+              ),
             ),
 
             const SizedBox(width: 15), 
@@ -130,7 +134,7 @@ class _PinnedPageState extends State<PinnedPage> {
 
     Container _buildUser() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20),
@@ -139,14 +143,6 @@ class _PinnedPageState extends State<PinnedPage> {
       child: Row(
         children: [
           const Icon(Icons.account_circle, color: Colors.white, size: 18),
-          const SizedBox(width: 5),
-          const Text(
-            "John Doe Jr.",
-            style: TextStyle(color: Colors.white, 
-            fontSize: 14,
-            letterSpacing: 2),
-          ),
-          const SizedBox(width: 5)
         ],
       ),
     );
@@ -211,7 +207,7 @@ class _PinnedPageState extends State<PinnedPage> {
             color: Colors.white,
           ),
         ),
-        const SizedBox(width: 8), // Spacing between the icon and text
+        const SizedBox(width: 8), 
         const Text(
           "Pinned Posts",
           style: TextStyle(
@@ -320,13 +316,13 @@ class _PinnedPageState extends State<PinnedPage> {
                     }
                     ),
                     Transform.rotate(
-                      angle: 0.65, // Tilt the pin diagonally (adjust as needed)
+                      angle: 0.65, 
                       child: ShaderMask(
                         shaderCallback: (Rect bounds) {
                           return LinearGradient(
                             colors: isPinned
-                                ?  [Color(0xFF6D0900), Color(0xFFD83F31)] // Pinned gradient
-                                : [Colors.black, Colors.black], // Default gradient
+                                ?  [Color(0xFF6D0900), Color(0xFFD83F31)] 
+                                : [Colors.black, Colors.black], 
                             begin: Alignment.centerRight,
                             end: Alignment.centerLeft,
                           ).createShader(bounds);
@@ -334,12 +330,12 @@ class _PinnedPageState extends State<PinnedPage> {
                         child: IconButton(
                           icon: Icon(
                             isPinned ? Icons.push_pin : Icons.push_pin_outlined,
-                            size: 24, // Adjust size if needed
+                            size: 24, 
                           ),
-                          color: Colors.white, // White base to blend with the gradient
+                          color: Colors.white, 
                           onPressed: () {
                             setState(() {
-                              pinnedPosts[index] = !isPinned; // Toggle pin state
+                              pinnedPosts[index] = !isPinned; 
                             });
                           },
                         ),
@@ -355,16 +351,7 @@ class _PinnedPageState extends State<PinnedPage> {
       ),
     );
   }
-
-
-
 }
 
-
-void main() {
-  runApp(MaterialApp(
-    home: PinnedPage(pinnedPosts: [],),
-  ));
-}
 
 

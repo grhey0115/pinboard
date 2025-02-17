@@ -219,6 +219,9 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:pinboard/pages/dashboard_page.dart';
+import 'package:pinboard/pages/sign_in_page.dart';
+import 'package:pinboard/pages/sign_up_page.dart';
 import './pages/home_page.dart';
 
 void main() {
@@ -232,7 +235,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      initialRoute: '/homepage',
+      routes: {
+        '/homepage': (context)=> const HomePage(),
+        '/sign-in': (context)=> const SignInPage(),
+        '/dashboard': (context) => const DashboardPage(),
+        '/sign-up': (context) => const SignUpPage(),
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import './dashboard_page.dart';
 import './sign_up_page.dart';
+import '../controllers/auth_controller.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -11,8 +12,35 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
   bool _obscurePassword = true;
+  bool _isLoading = false;
+
+  final _authController = AuthController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _handleSignIn() async{
+    setState(() {
+      _isLoading =true;
+    });
+
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+
+    bool success = await _authController.signIn(username, password);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (success) {
+      Navigator.pushReplacementNamed(context, "/dashboard");
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Invalid credentials!")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +220,7 @@ class _SignInPageState extends State<SignInPage> {
       children: [
         const Text('Username', style: TextStyle(fontSize: 20, color: Colors.redAccent)),
         TextField(
+          controller: _usernameController,
           decoration: const InputDecoration(
             hintText: 'Enter your username',
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
@@ -203,6 +232,7 @@ class _SignInPageState extends State<SignInPage> {
           color: Colors.redAccent)),
         TextField(
           obscureText: _obscurePassword,
+          controller: _passwordController,
           decoration: InputDecoration(
             suffixIcon: IconButton(
               icon: Icon(
@@ -224,42 +254,35 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Widget _buildSignInButton(BuildContext context) {
-  return SizedBox(
-    width: double.infinity,
-    height: 60,
-    child: Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF6D0900), Color(0xFFD83F31)],
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
+    return SizedBox(
+      width: double.infinity,
+      height: 60,
+      child: InkWell(
+        onTap: _handleSignIn,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF6D0900), Color(0xFFD83F31)],
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
-        ),
-        onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => DashboardPage(),
-            ),
+          child: Center(
+            child: _isLoading
+                ? const CircularProgressIndicator(color: Colors.white)
+                : const Text(
+                    'SIGN IN',
+                    style: TextStyle(
+                      color: Colors.white, 
+                      fontSize: 18, 
+                      fontWeight: FontWeight.w700),
+                  ),
           ),
-        child: const Text(
-          'SIGN IN',
-          style: TextStyle(
-            color: Colors.white, 
-            fontSize: 18, 
-            fontWeight: FontWeight.w700),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildSignUpText(BuildContext context) {
     return Column(

@@ -295,26 +295,25 @@ class _SignUpPageState extends State<UpdateProfilePage> {
   }
 
   Widget _buildUser() {
-    return Padding(
-      padding: const EdgeInsets.all(0),
-      child: GestureDetector(
-        onTap: () => _showLogoutDialog(context),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: Colors.white),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.account_circle, color: Colors.white, size: 18),
-            ],
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => _showLogoutDialog(context),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(color: Colors.white),
+            ),
+            child: const Icon(Icons.account_circle, color: Colors.white, size: 18),
           ),
         ),
-      ),
+        const SizedBox(width: 55), // Now correctly positioned
+      ],
     );
   }
+
 
   void _showLogoutDialog(BuildContext context) {
     showDialog(
